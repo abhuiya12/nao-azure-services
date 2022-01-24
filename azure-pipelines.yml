@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    mavenOptions: '-Xmx3072m'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.11'
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false    
+    goals: 'package'
+
+- task: AzureSpringCloud@0
+  inputs:
+    azureSubscription: 'WMT Cloudathon Training(b54acde2-eb6d-488b-8439-066dbd54def8)'
+    Action: 'Deploy'
+    AzureSpringCloud: 'NAO-Demo-Service'
+    AppName: 'nao-demo-services-api'
+    UseStagingDeployment: true
+    Package: './target/nao-azure-services.jar'
