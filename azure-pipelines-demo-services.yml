@@ -9,7 +9,7 @@ trigger:
 variables:
 
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: 'Azure subscription 1(06c6790c-ed73-4066-9d3e-4f567581a804)'
+  azureSubscription: '06c6790c-ed73-4066-9d3e-4f567581a804'
 
   # Web app name
   webAppName: 'nao-demo-services'
